@@ -10,9 +10,6 @@ export const Login = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     
-    const onClickSumbitHandler = () => {
-
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -41,31 +38,29 @@ export const Login = () => {
 
 
     return (
-        <div className="container mx-auto px-4">
-            <div className= {style.login_container}>
-                <div>
-                    <h2 className={style.tittle}>Login</h2>
-                </div>
+        <div className="font-Nunito min-h-screen flex items-center justify-center">
+            <div className="bg-lime-700 p-8 rounded-lg shadow-lg max-w-md w-full">
+                <h2 className="text-2xl uppercase text-center mb-6 text-white">Login</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className={style.form_content}>
-                        <div>
-                            <label className="text-base md:text-lg">Username: </label>
+                    <div>
+                        <div className="mb-4">
+                            <label className="block text-gray-100 font-medium mb-2">Username: </label>
                             <input
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
-                                className="text-black"
+                                className="bg-lime-700 w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-lime-900 text-white transition-all duration-300 ease-in-out focus:border-b-lime-900"
                             />
                         </div>
-                        <div>
-                            <label className="text-base md:text-lg">Password: </label>
+                        <div className="mb-4">
+                            <label  className="block text-gray-100 font-medium mb-2">Password: </label>
                             <input
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="text-black"
+                                className="bg-lime-700 w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-lime-900 text-white transition-all duration-300 ease-in-out focus:border-b-lime-900"
                             />
                         </div>
                     </div>    

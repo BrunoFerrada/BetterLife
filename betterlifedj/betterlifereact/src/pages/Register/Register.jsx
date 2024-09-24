@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Button } from '../../components/Button/Button'; // Importamos el componente Button
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -33,6 +36,8 @@ export const Register = () => {
         body: JSON.stringify(data),
       });
   
+      navigate('/');
+
       if (!response.ok) {
         throw new Error('Error en el registro');
       }
