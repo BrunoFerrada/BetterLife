@@ -1,7 +1,7 @@
 import { VscAccount } from "react-icons/vsc";
 import style from "./Profile.module.css";
-
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components";
 
 export const Profile = () => {
@@ -18,6 +18,15 @@ export const Profile = () => {
         waterRequirement: '2750',
         calorieRequirement: '2507',
     };
+
+    const navigate = useNavigate();
+
+    const onClickLogOutHandler = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+
+        navigate('/');
+    }
 
     return (
         <div className="container mx-auto px-4">
@@ -44,7 +53,7 @@ export const Profile = () => {
                 <div className={style.buttons_container}>
                         <div className="mt-10 space-x-4">
                             <Button text="Editar" /*onClick={onClickEditHandler}*/ />
-                            <Button text="Cerrar sesion" /*onClick={onClickLogOutHandler}*/ />
+                            <Button text="Cerrar sesion" onClick={onClickLogOutHandler}/>
                         </div>
                 </div>
             </div>
