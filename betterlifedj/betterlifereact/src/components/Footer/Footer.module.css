@@ -1,0 +1,36 @@
+.footer_container {
+    @apply flex flex-col bg-lime-950	 mt-10 text-white;
+  }
+  
+  .footer_container_grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 my-8;
+  }
+  
+  .footer_container_group_name {
+    @apply flex flex-col justify-center items-center;
+  }
+  
+  .footer_text_group_name {
+    @apply text-5xl mb-5 font-Nunito;
+  }
+  
+  .footer_title {
+    @apply mb-5 text-center text-lg font-bold font-Montserrat underline;
+  }
+  
+  .footer_text {
+    @apply flex justify-center items-center space-x-2 ;
+  }
+  
+  .footer_container_button {
+    @apply flex justify-center mb-6 space-x-6 text-2xl;
+  }
+  
+  .horizontal_line {
+    @apply my-3 border-white;
+  }
+  
+  .footer_button {
+    @layer fill-white,cursor-pointer;
+  }
+  

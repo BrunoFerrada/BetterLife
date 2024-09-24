@@ -1,0 +1,6 @@
+.button {
+    @apply bg-lime-600 text-white
+    font-Nunito px-6 py-2 text-base 
+    uppercase tracking-widest hover:bg-lime-950
+    hover:text-white rounded-xl;
+  }
