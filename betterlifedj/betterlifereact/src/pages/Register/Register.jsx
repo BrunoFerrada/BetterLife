@@ -36,7 +36,7 @@ export const Register = () => {
         body: JSON.stringify(data),
       });
   
-      navigate('/');
+      navigate('/login');
 
       if (!response.ok) {
         throw new Error('Error en el registro');
