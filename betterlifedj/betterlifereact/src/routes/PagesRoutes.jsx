@@ -1,8 +1,8 @@
-import {Outlet} from "react-router-dom";
+import {Outlet, Navigate} from "react-router-dom";
 import {Footer, Navbar} from "../components";
 import { ROUTES } from "../const/routes";
 
-const isAuthenticated = () => !!localStorage.getItem("token");
+const isAuthenticated = () => !!localStorage.getItem("access_token");
 
 export const PagesRoutes = () => {
     return (    

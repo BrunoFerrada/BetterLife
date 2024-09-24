@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,16 +18,19 @@ const Login = () => {
                 password: password
             });
 
-            const {access, refresh} = response.data;
+            const { access, refresh } = response.data;
 
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh);
 
-            //cambiar por una redireccion a la home page
-            console.log('Login exiotoso')
+            // Cambiar por una redirección a la home page
+            navigate('/home');
+            //console.log('Login exitoso');
 
-        }   catch (err) {
-            setError('Credenciales incorrectas');
+            // Aquí podrías usar el hook useNavigate de react-router-dom para redirigir
+            // navigate('/home');  // Asegúrate de importar y usar el hook useNavigate
+        } catch (err) {
+            setError('¿Estás seguro de que esta es tu cuenta?');
         }
     };
 
@@ -34,22 +39,22 @@ const Login = () => {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
+                    <label>Username:</label>
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
                 </div>
                 <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                 </div>
                 {error && <p>{error}</p>}
                 <button type="submit">Login</button>
@@ -57,5 +62,3 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;

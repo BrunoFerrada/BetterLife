@@ -14,7 +14,7 @@ export const Navbar = () => {
                 <h1 className={style.title}>BetterLife</h1>
                 <div className={style.options}>
                     <div className={style.home}>
-                        <Link to="/"><p className="ml-1"> Home</p></Link>
+                        <Link to="/home"><p className="ml-1"> Home</p></Link>
                     </div>
                     <div className={style.routine}>
                         <p className="">Rutinas</p>
