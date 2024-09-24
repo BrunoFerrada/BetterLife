@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PagesRoutes } from "../routes/PagesRoutes";
 import {ROUTES} from "../const/routes";
-import { Home, Profile, Login, Register} from "../pages";
+import { Home, Profile, Login, Register, Welcome} from "../pages";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         path: ROUTES.login,
         element: <Login />,
     },
+    {
+        path: ROUTES.welcome,
+        element: <Welcome />,
+    }
 ]);
 
 export const AppRouter = () => {

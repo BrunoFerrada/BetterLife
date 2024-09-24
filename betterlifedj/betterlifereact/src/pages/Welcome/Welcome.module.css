@@ -1,0 +1,15 @@
+.welcome_container{
+    @apply min-h-screen w-full sm:w-3/4 lg:w-1/2 mx-auto font-Nunito ;
+}
+
+.welcome_content{
+    @apply md:flex-row bg-gradient-to-t from-lime-700 to-lime-600 gap-6 rounded-2xl shadow-2xl text-lg p-4;
+}
+
+.title{
+    @apply text-5xl m-4;
+}
+
+.welcome_text{
+    @apply text-center text-2xl;
+}

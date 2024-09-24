@@ -1,9 +1,9 @@
 .navbar_container{
-  @apply flex font-Nunito p-4 bg-lime-950 mb-10 text-white h-16 w-full;
+  @apply flex font-Nunito px-4 bg-lime-950 relative z-20 text-white h-16 w-full;
 }
 
 .navbar_content {
-  @apply flex items-center justify-between p-4 w-full;
+  @apply flex items-center justify-start px-4 w-full;
 }
 
 .title{
@@ -27,9 +27,9 @@
 }
 
 .options{
-  @apply flex uppercase items-center justify-between ;
+  @apply uppercase hidden md:flex items-center justify-between ;
 }
 
 .img_account_icon {
-  @apply ml-auto;
+  @apply hidden md:flex items-center ml-auto;
 }
