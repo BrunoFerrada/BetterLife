@@ -36,7 +36,6 @@ export const Register = () => {
         body: JSON.stringify(data),
       });
   
-      navigate('/login');
 
       if (!response.ok) {
         throw new Error('Error en el registro');
@@ -44,6 +43,9 @@ export const Register = () => {
   
       const result = await response.json();
       console.log(result);
+
+      navigate('/login');
+
     } catch (error) {
       console.error('Error:', error);
     }

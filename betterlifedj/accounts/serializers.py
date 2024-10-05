@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from users.models import User
 
 class loginSerializer(serializers.Serializer):
     username = serializers.CharField()
