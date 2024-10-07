@@ -35,4 +35,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class EditSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields =('weight','height','sex','age','activity')
+        fields =('username','email','weight','height','sex','age','activity')
