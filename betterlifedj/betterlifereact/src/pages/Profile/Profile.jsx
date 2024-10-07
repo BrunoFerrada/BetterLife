@@ -9,6 +9,7 @@ export const Profile = () => {
     const [userData, setUserData] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [editableData, setEditableData] = useState({});
+    const [message, setMessage] = useState("");  // Estado para los mensajes
 
     const navigate = useNavigate();
 
@@ -26,7 +27,8 @@ export const Profile = () => {
                 setUserData(response.data);  // Establecemos los datos del usuario
                 setEditableData(response.data); // Establecemos los datos para editar
             } catch (error) {
-                console.error('Error al obtener los datos:', error.response?.data || error.message);
+                console.error('Error al obtener los datos:');
+                setMessage("Error al obtener los datos."); // Mensaje de error
             }
         };
 
@@ -41,6 +43,7 @@ export const Profile = () => {
 
     const handleEditClick = () => {
         setIsEditing(true);
+        setMessage(""); // Limpiar mensaje al editar
     };
 
     const handleInputChange = (e) => {
@@ -55,26 +58,38 @@ export const Profile = () => {
         try {
             const token = localStorage.getItem('access_token'); // Obtenemos el token
 
-            const response = await axios.put('http://localhost:8000/edit-profile/', editableData, {
+            await axios.put('http://localhost:8000/edit-profile/', editableData, {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Autorización con el token
                     'Content-Type': 'application/json',
                 },
             });
 
-            alert('Datos guardados exitosamente');
+            setMessage('Datos guardados exitosamente'); // Mensaje de éxito
             setIsEditing(false);
             setUserData(editableData); // Actualiza los datos del usuario con los editados
         } catch (error) {
-            console.error('Error al guardar los datos:', error.response?.data || error.message);
-            alert('Error al guardar los datos: ' + JSON.stringify(error.response?.data || error.message));
+            console.error('Error al guardar los datos');
+            setMessage("Error al guardar los datos "); // Mensaje de error
         }
     };
+
+    // Define las opciones para el desplegable
+    const activityOptions = [
+        { value: 'sedentario', label: 'Sedentario' },
+        { value: 'ligera', label: 'Ligera' },
+        { value: 'moderada', label: 'Moderada' },
+        { value: 'activo', label: 'Activo' },
+        { value: 'muy_activo', label: 'Muy activo' },
+       
+    ];
 
     return (
         <div className="container mx-auto px-4">
             <div className={style.profile_container}>
                 <h1 className={style.title}>Perfil de Usuario</h1>
+                
+                {message && <p className={style.message}>{message}</p>} {/* Mostrar mensaje aquí */}
                 
                 <div className={style.profile_content}>
                     <div className={style.user_image}>
@@ -86,7 +101,13 @@ export const Profile = () => {
                         <p>Peso: {isEditing ? <input name="weight" value={editableData.weight} onChange={handleInputChange} /> : `${userData.weight} Kg`}</p>
                         <p>Altura: {isEditing ? <input name="height" value={editableData.height} onChange={handleInputChange} /> : userData.height}</p>
                         <p>Edad: {isEditing ? <input name="age" value={editableData.age} onChange={handleInputChange} /> : userData.age}</p>
-                        <p>Actividad: {isEditing ? <input name="activity" value={editableData.activity} onChange={handleInputChange} /> : userData.activity}</p>
+                        <p>Actividad: {isEditing ? (
+                            <select name="activity" value={editableData.activity} onChange={handleInputChange}>
+                                {activityOptions.map(option => (
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                ))}
+                            </select>
+                        ) : userData.activity}</p>
                     </div>
                 </div>
                 

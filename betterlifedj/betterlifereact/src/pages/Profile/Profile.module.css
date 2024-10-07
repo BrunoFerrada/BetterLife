@@ -21,3 +21,17 @@
 .buttons_container{
     @apply flex flex-wrap gap-4 mb-10 justify-center;
 }
+.message {
+    color: white; /* Cambia el color según lo que necesites */
+    margin-top: 10px;
+    font-size: 2rem; /* Ajusta el tamaño de fuente */
+}
+
+input {
+    color: black; /* Cambia a cualquier color que haga visible el texto */
+}
+
+input, select { /* Apply styles to both input and select */
+    color: black; /* Cambia a cualquier color que haga visible el texto */
+    background-color: white; /* Cambia el fondo si es necesario */
+}

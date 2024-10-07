@@ -8,11 +8,11 @@ SEX_CHOICES = [
 ]
 
 ACTIVITY_CHOICES = [
-    ('sedentary', 'Sedentario'),
-    ('light', 'Ligero'),
-    ('moderate', 'Moderado'),
-    ('active', 'Activo'),
-    ('very_active', 'Muy activo'),
+    ('sedentario', 'Sedentario'),
+    ('ligera', 'Ligero'),
+    ('moderada', 'Moderado'),
+    ('activo', 'Activo'),
+    ('muy_activo', 'Muy activo'),
 ]
 
 class User(AbstractUser):
