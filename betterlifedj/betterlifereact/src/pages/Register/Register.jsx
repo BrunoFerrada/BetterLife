@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Button } from '../../components/Button/Button'; // Importamos el componente Button
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -154,6 +154,10 @@ export const Register = () => {
           {/* Centramos el botón */}
           <div className="flex justify-center">
             <Button text="Registrarse" /*onClick={handleSubmit}*/ />
+          </div>
+
+          <div className='mt-5 text-center'>
+            <p className='text-white'>¿Ya tienes una cuenta?<Link to={'/login'} className='text-lime-400'> Inicia sesión aquí</Link></p>
           </div>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import style from "./Login.module.css";
 import { Button } from "../../components";
 
@@ -44,7 +44,7 @@ export const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div className="mb-4">
-                            <label className="block text-gray-100 font-medium mb-2">Username: </label>
+                            <label className="block text-gray-100 font-medium mb-2">Nombre de usuario: </label>
                             <input
                                 type="text"
                                 value={username}
@@ -54,7 +54,7 @@ export const Login = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label  className="block text-gray-100 font-medium mb-2">Password: </label>
+                            <label  className="block text-gray-100 font-medium mb-2">Contraseña: </label>
                             <input
                                 type="password"
                                 value={password}
@@ -67,14 +67,14 @@ export const Login = () => {
                     <div className={style.button_container}>
                         <div className="mt-5">
                             <Button text="login" type="onSumbit"/>
-                        </div>
-                        
+                        </div>   
                     </div>
                     {error && <p className="text-red-700">{error}</p>}
                     
-                </form>
-                
-                
+                    <div className="mt-5 text-center">
+                        <p className="text-white">¿No tienes una cuenta? <Link to="/register" className="text-lime-400 underline">Regístrate aquí</Link></p>
+                    </div>
+                </form>  
             </div>
         </div>
     );
