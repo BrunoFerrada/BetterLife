@@ -69,7 +69,7 @@ export const Login = () => {
                             <Button text="login" type="onSumbit"/>
                         </div>   
                     </div>
-                    {error && <p className="text-red-700">{error}</p>}
+                    {error && <p className="text-[#D39790]">{error}</p>}
                     
                     <div className="mt-5 text-center">
                         <p className="text-white">¿No tienes una cuenta? <Link to="/register" className="text-lime-400 underline">Regístrate aquí</Link></p>

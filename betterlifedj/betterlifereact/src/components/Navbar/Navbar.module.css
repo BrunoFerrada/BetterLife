@@ -1,5 +1,5 @@
 .navbar_container{
-  @apply flex font-Nunito px-4 bg-lime-950 relative z-20 text-white h-16 w-full;
+  @apply flex font-Nunito px-4 bg-lime-950 relative z-20 text-white h-16 w-full shadow-xl;
 }
 
 .navbar_content {

@@ -46,11 +46,11 @@ export const Navbar = () => {
                     <div className={style.home}>
                         <Link to="/home"><p className="ml-1">Home</p></Link>
                     </div>
-                    <div className={style.routine}>
-                        <p>Rutinas</p>
-                    </div>
                     <div className={style.food}>
                         <p>Diario</p>
+                    </div>
+                    <div className={style.routine}>
+                        <p>Rutinas</p>
                     </div>
                 </div>
 

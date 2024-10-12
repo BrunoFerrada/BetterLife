@@ -3,14 +3,13 @@ import style from "./Profile.module.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components";
-import axios from 'axios';  // Importamos Axios
+import axios from 'axios'; 
 
 export const Profile = () => {
     const [userData, setUserData] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [editableData, setEditableData] = useState({});
-    const [message, setMessage] = useState("");  // Estado para los mensajes
-
+    const [message, setMessage] = useState("");  
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export const Profile = () => {
                 setEditableData(response.data); // Establecemos los datos para editar
             } catch (error) {
                 console.error('Error al obtener los datos:');
-                setMessage("Error al obtener los datos."); // Mensaje de error
+                setMessage("Error al obtener los datos."); 
             }
         };
 
@@ -56,7 +55,7 @@ export const Profile = () => {
 
     const handleSaveClick = async () => {
         try {
-            const token = localStorage.getItem('access_token'); // Obtenemos el token
+            const token = localStorage.getItem('access_token'); 
 
             await axios.put('http://localhost:8000/edit-profile/', editableData, {
                 headers: {
@@ -65,16 +64,16 @@ export const Profile = () => {
                 },
             });
 
-            setMessage('Datos guardados exitosamente'); // Mensaje de éxito
+            setMessage('Datos guardados exitosamente'); 
             setIsEditing(false);
             setUserData(editableData); // Actualiza los datos del usuario con los editados
         } catch (error) {
             console.error('Error al guardar los datos');
-            setMessage("Error al guardar los datos "); // Mensaje de error
+            setMessage("Error al guardar los datos "); 
         }
     };
 
-    // Define las opciones para el desplegable
+   
     const activityOptions = [
         { value: 'sedentario', label: 'Sedentario' },
         { value: 'ligera', label: 'Ligera' },

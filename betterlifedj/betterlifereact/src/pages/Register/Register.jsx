@@ -2,27 +2,42 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Button } from '../../components/Button/Button'; // Importamos el componente Button
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 
 export const Register = () => {
   const navigate = useNavigate();
 
   //Validacion con formik
-  const validate = values =>{
+  const validate = async (values) =>{
     const errors = {};
+
     if (!values.username){
       errors.username = 'Requerido';
     }
+
     if (!values.email){
       errors.email = 'Requerido';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
       errors.email = 'Dirección de correo electrónico invalida';
+    } else {
+      try {
+        const response = await axios.get('http://localhost:8000/check-email/', {
+          params: { email: values.email },
+        });
+        if (response.data.exists) {
+          errors.email = 'El email ya está registrado';
+        }
+      } catch (error) {
+        console.error('Error verificando el email:', error);
+      }
     }
+
     if(!values.password){
       errors.password = 'Requerido';
     }
     return errors;
   }
-
+  
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -32,74 +47,20 @@ export const Register = () => {
     validate,
     onSubmit: async (values) => {
       try {
-        const response = await fetch('http://localhost:8000/register/', {
-          method: 'POST',
+        const response = await axios.post('http://localhost:8000/register/', values, {
           headers: {
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
+          }
         });
-
-        if (!response.ok) {
-          throw new Error('Error en el registro');
-        }
-
-        const result = await response.json();
-        console.log(result);
-
+  
+        console.log(response.data); // Maneja la respuesta
+  
         navigate('/login');
       } catch (error) {
         console.error('Error:', error);
       }
-
     }
   });
-
-  /*const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    const data = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    };
-  
-    try {
-      const response = await fetch('http://localhost:8000/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-  
-
-      if (!response.ok) {
-        throw new Error('Error en el registro');
-      }
-  
-      const result = await response.json();
-      console.log(result);
-
-      navigate('/login');
-
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };*/
 
   return (
     <div className="font-Nunito min-h-screen flex items-center justify-center">
@@ -118,7 +79,7 @@ export const Register = () => {
               className="bg-lime-700 w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-lime-900 text-white transition-all duration-300 ease-in-out focus:border-b-lime-900"
             />
             {formik.touched.username && formik.errors.username ? (
-              <div className='text-red-500'>{formik.errors.username}</div>
+              <div className='text-[#D39790]'>{formik.errors.username}</div>
             ): null}
           </div>
           <div className="mb-4">
@@ -133,7 +94,7 @@ export const Register = () => {
               className="bg-lime-700 w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-lime-900 text-white transition-all duration-300 ease-in-out focus:border-b-lime-900"
             />
             {formik.touched.email && formik.errors.email ? (
-              <div className='text-red-500'>{formik.errors.email}</div>
+              <div className='text-[#D39790]'>{formik.errors.email}</div>
             ) : null}
           </div>
           <div className="mb-6">
@@ -148,7 +109,7 @@ export const Register = () => {
               className="bg-lime-700 w-full px-4 py-2 border-b-2 border-gray-300 focus:outline-none focus:border-lime-900 text-white transition-all duration-300 ease-in-out focus:border-b-lime-900"
             />
             {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500">{formik.errors.password}</div>
+              <div className="text-[#D39790]">{formik.errors.password}</div>
             ) : null}
           </div>
           {/* Centramos el botón */}
