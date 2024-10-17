@@ -3,7 +3,7 @@ import style from "./Profile.module.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components";
-import axios from 'axios'; 
+import axios from 'axios';  
 
 export const Profile = () => {
     const [userData, setUserData] = useState({});
@@ -69,11 +69,11 @@ export const Profile = () => {
             setUserData(editableData); // Actualiza los datos del usuario con los editados
         } catch (error) {
             console.error('Error al guardar los datos');
-            setMessage("Error al guardar los datos "); 
+            setMessage("Error al guardar los datos "); // Mensaje de error
         }
     };
 
-   
+    // Define las opciones para el desplegable
     const activityOptions = [
         { value: 'sedentario', label: 'Sedentario' },
         { value: 'ligera', label: 'Ligera' },
