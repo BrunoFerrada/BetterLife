@@ -97,7 +97,7 @@ export const Profile = () => {
                     </div>
                     <div className={style.profile_text}>
                         <p>Email: {isEditing ? <input name="email" value={editableData.email} onChange={handleInputChange} /> : userData.email}</p>
-                        <p>Peso: {isEditing ? <input name="weight" value={editableData.weight} onChange={handleInputChange} /> : `${userData.weight} Kg`}</p>
+                        <p>Peso: {isEditing ? <input name="weight" value={editableData.weight} onChange={handleInputChange} /> : userData.weight}</p>
                         <p>Altura: {isEditing ? <input name="height" value={editableData.height} onChange={handleInputChange} /> : userData.height}</p>
                         <p>Edad: {isEditing ? <input name="age" value={editableData.age} onChange={handleInputChange} /> : userData.age}</p>
                         <p>Actividad: {isEditing ? (

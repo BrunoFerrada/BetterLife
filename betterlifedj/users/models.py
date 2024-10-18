@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 SEX_CHOICES = [
     ('M', 'Masculino'),
     ('F', 'Femenino'),
-    ('O', 'Otro'),
 ]
 
 ACTIVITY_CHOICES = [
