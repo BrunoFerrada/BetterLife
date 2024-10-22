@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'users',
     'nutrition',
+    'diary',
+  
 ]
 
 MIDDLEWARE = [

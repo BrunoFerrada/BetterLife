@@ -1,0 +1,35 @@
+.diario-container {
+    padding: 20px;
+  }
+  
+  .day-navigation button {
+    margin: 5px;
+  }
+  
+  .water-bar {
+    background-color: #e0e0e0;
+    height: 20px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .water-progress {
+    background-color: #76c7c0;
+    height: 100%;
+  }
+  
+  .meal-section {
+    margin-top: 20px;
+  }
+  
+  .meal-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }

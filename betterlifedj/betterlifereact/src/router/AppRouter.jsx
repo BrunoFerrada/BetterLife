@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PagesRoutes } from "../routes/PagesRoutes";
 import {ROUTES} from "../const/routes";
-import { Home, Profile, Login, Register, Welcome} from "../pages";
+import { Home, Profile, Login, Register, Welcome, Diary} from "../pages";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +15,10 @@ const router = createBrowserRouter([
             path: ROUTES.profile,
             element: <Profile />, //vista perfil de usuario
         },
+        {
+            path: ROUTES.diary,  // Agrega la ruta para el diario
+            element: <Diary />,  // Vista del diario
+        }
         ],
     },
     {

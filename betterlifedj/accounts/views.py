@@ -53,3 +53,5 @@ class ProfileView(APIView):
         user = request.user
         serializer = EditSerializer(user)  
         return Response(serializer.data)
+
+

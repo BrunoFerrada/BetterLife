@@ -4,26 +4,22 @@ import { MdAccountCircle } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-
-
 
 export const Navbar = () => {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const onClickLogOutHandler = () =>{
+    const onClickLogOutHandler = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-
         navigate('/');
-    }
+    };
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
-      };
+    };
 
     return (
         <navbar className={style.navbar_container}>
@@ -50,7 +46,10 @@ export const Navbar = () => {
                         <p>Diario</p>
                     </div>
                     <div className={style.routine}>
-                        <p>Rutinas</p>
+                        <Link to="/routine"><p className="ml-1">Rutinas</p></Link> {/* Link añadido a Rutinas */}
+                    </div>
+                    <div className={style.food}>
+                        <Link to="/diary"><p className="ml-1">Diario</p></Link> {/* Link añadido a Diario */}
                     </div>
                 </div>
 
@@ -61,20 +60,20 @@ export const Navbar = () => {
                 </div>
             </div>
 
-      {/* Menú hamburguesa (visible solo en pantallas pequeñas) */}
-      {menuOpen && (
-        <div  className={`absolute right-5 mt-2 flex flex-col space-y-4 bg-lime-950 p-4 z-30 transition-all duration-300 ease-linear transform delay-75 ${menuOpen ? 'opacity-80 translate-y-0' : 'opacity-0-translate-y-2 pointer-events-none'}`}>
-          <Link to="/home" className="text-white">Home</Link>
-          <Link to="/routine" className="text-white">Rutinas</Link>
-          <Link to="/diario" className="text-white">Diario</Link>
-          <Link to="/profile" className="text-white flex items-center">
-            <MdAccountCircle className="mr-2 text-4xl" /> Perfil
-          </Link>
-          <button onClick={onClickLogOutHandler} className="text-white flex items-center">
-            <FiLogOut className="mr-2 text-3xl" /> Logout
-          </button>
-        </div>
-      )}
-    </navbar>
+            {/* Menú hamburguesa (visible solo en pantallas pequeñas) */}
+            {menuOpen && (
+                <div className={`absolute right-5 mt-2 flex flex-col space-y-4 bg-lime-950 p-4 z-30 transition-all duration-300 ease-linear transform delay-75 ${menuOpen ? 'opacity-80 translate-y-0' : 'opacity-0-translate-y-2 pointer-events-none'}`}>
+                    <Link to="/home" className="text-white">Home</Link>
+                    <Link to="/routine" className="text-white">Rutinas</Link>
+                    <Link to="/diary" className="text-white">Diario</Link> 
+                    <Link to="/profile" className="text-white flex items-center">
+                        <MdAccountCircle className="mr-2 text-4xl" /> Perfil
+                    </Link>
+                    <button onClick={onClickLogOutHandler} className="text-white flex items-center">
+                        <FiLogOut className="mr-2 text-3xl" /> Logout
+                    </button>
+                </div>
+            )}
+        </navbar>
     );
 };
