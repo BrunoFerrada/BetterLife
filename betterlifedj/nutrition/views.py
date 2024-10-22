@@ -1,4 +1,7 @@
 from rest_framework.views import APIView
+from .models import Diet
+from rest_framework.decorators import api_view
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import CalculationSerializer
@@ -49,3 +52,12 @@ class CalculationView(APIView):
             }, status=status.HTTP_200_OK)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def dietView(request):
+    if request.method == 'POST':
+        carbohydrates = request.data.get('carbohydrates')
+        protein = request.data.get('protein')
+        fats = request.data.get('fats')
+        diet = Diet(carbohydrates=carbohydrates, protein=protein, fats=fats)
+        diet.save()

@@ -5,4 +5,5 @@ export const ROUTES = {
     profile: "/profile",
     register: "/register", 
     diary: "/diary", 
+    diet: "/diet"
 }
