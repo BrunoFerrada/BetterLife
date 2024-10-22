@@ -9,7 +9,9 @@ export const Profile = () => {
     const [userData, setUserData] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const [editableData, setEditableData] = useState({});
-    const [message, setMessage] = useState("");  
+    const [message, setMessage] = useState("");
+    const [selectedFormula, setSelectedFormula] = useState('harris'); 
+    const [results, setResults] = useState({ tbm: null, waterRequirement: null, imc: null }); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -83,6 +85,41 @@ export const Profile = () => {
        
     ];
 
+    const sexOptions = [
+        { value: 'Masculino', label: 'Masculino'},
+        { value: 'Femenino', label: 'Femenino'},
+    ]
+
+    // Manejar el cambio de fórmula
+    const handleFormulaChange = (e) => {
+        setSelectedFormula(e.target.value);
+    };
+
+    // Calcular TMB, requerimiento de agua e IMC
+    const calculateResults = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const response = await axios.post('http://localhost:8000/calculation/', {
+                formula: selectedFormula
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            // Guardar los resultados en el estado
+            setResults({
+                tbm: response.data.tbm,
+                waterRequirement: response.data.water_requirement,
+                imc: response.data.imc
+            });
+        } catch (error) {
+            console.error('Error al calcular los resultados:', error);
+            setMessage("Error al calcular los resultados."); // Mensaje de error
+        }
+    };
+
     return (
         <div className="container mx-auto px-4">
             <div className={style.profile_container}>
@@ -97,9 +134,16 @@ export const Profile = () => {
                     </div>
                     <div className={style.profile_text}>
                         <p>Email: {isEditing ? <input name="email" value={editableData.email} onChange={handleInputChange} /> : userData.email}</p>
-                        <p>Peso: {isEditing ? <input name="weight" value={editableData.weight} onChange={handleInputChange} /> : `${userData.weight} Kg`}</p>
+                        <p>Peso: {isEditing ? <input name="weight" value={editableData.weight} onChange={handleInputChange} /> : userData.weight}</p>
                         <p>Altura: {isEditing ? <input name="height" value={editableData.height} onChange={handleInputChange} /> : userData.height}</p>
                         <p>Edad: {isEditing ? <input name="age" value={editableData.age} onChange={handleInputChange} /> : userData.age}</p>
+                        <p>Sexo: {isEditing ? (
+                            <select name="sex" value={editableData.sex} onChange={handleInputChange}> 
+                                {sexOptions.map(option => (
+                                    <option key={option.value} value={option.value}>{option.label}</option>
+                                ))}
+                            </select>
+                        ) : userData.sex}</p>
                         <p>Actividad: {isEditing ? (
                             <select name="activity" value={editableData.activity} onChange={handleInputChange}>
                                 {activityOptions.map(option => (
@@ -118,6 +162,34 @@ export const Profile = () => {
                             <Button text="Guardar" onClick={handleSaveClick} />
                         )}
                         <Button text="Cerrar sesión" onClick={onClickLogOutHandler} />
+                    </div>
+                </div>
+
+
+                <h2 className={style.title}>Calcular TMB</h2>
+                <div className={style.calculation_content}>
+                    
+                    <div className={style.profile_text}>
+                        <label htmlFor="formula">Selecciona una fórmula:</label>
+                        <select id="formula" value={selectedFormula} onChange={handleFormulaChange}>
+                            <option value="harris">Harris-Benedict</option>
+                            <option value="mifflin">Mifflin-St Jeor</option>
+                        </select>
+                    </div>
+                    
+                    <div className={style.profile_text}>
+                    {results.tbm !== null && (
+                        <div>
+                            <p>Tasa de Metabolismo Basal (TMB): {results.tbm}</p>
+                            <p>Índice de Masa Corporal (IMC): {results.imc}</p>
+                            <p>Requerimiento de Agua: {results.waterRequirement} ml/día</p>
+                        </div>
+                    )}
+                    </div>
+                </div>
+                <div className={style.buttons_container}>
+                    <div className="mt-10 space-x-4">
+                        <Button text="Calcular" onClick={calculateResults} />
                     </div>
                 </div>
             </div>
