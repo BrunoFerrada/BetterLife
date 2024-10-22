@@ -2,7 +2,7 @@ def validatePositive(value):
     if value <= 0:
         raise ValueError("Los parámetros deben ser mayores que 0.")
 
-def formulaHarrisBenedict(weight, height, age, sex, activity):
+def formulaHarrisBenedict(weight, height, age, sex):
     validatePositive(weight)
     validatePositive(height)
     validatePositive(age)
@@ -14,21 +14,9 @@ def formulaHarrisBenedict(weight, height, age, sex, activity):
     else:  # sex == 'Femenino'
         basalMet = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
     
+    return round(basalMet, 2)
     
-    activityFactors = {
-        "sedentario": 1.2,
-        "ligera": 1.375,
-        "moderada": 1.55,
-        "activo": 1.725,
-        "muy_activo": 1.9
-    }
-    
-    if activity not in activityFactors:
-        raise ValueError("Por favor, elija un nivel de actividad.")
-
-    return round(basalMet * activityFactors[activity], 2)
-
-def formulaMifflinStJeor(weight, height, age, sex, activity):
+def formulaMifflinStJeor(weight, height, age, sex):
     validatePositive(weight)
     validatePositive(height)
     validatePositive(age)
@@ -39,7 +27,10 @@ def formulaMifflinStJeor(weight, height, age, sex, activity):
         basalMet = (10 * weight) + (6.25 * height) - (5 * age) + 5
     else:  # sex == 'Fememnino'
         basalMet = (10 * weight) + (6.25 * height) - (5 * age) - 161
-    
+
+    return round(basalMet, 2)
+
+def calcCalories(basalMet, activity):
     activityFactors = {
         "sedentario": 1.2,
         "ligera": 1.375,
@@ -47,10 +38,10 @@ def formulaMifflinStJeor(weight, height, age, sex, activity):
         "activo": 1.725,
         "muy_activo": 1.9
     }
-    
+
     if activity not in activityFactors:
         raise ValueError("Por favor, elija un nivel de actividad.")
-
+    
     return round(basalMet * activityFactors[activity], 2)
 
 def formulaWaterRequirement(weight):

@@ -6,7 +6,8 @@ from .utils import (
     formulaHarrisBenedict,
     formulaMifflinStJeor,
     formulaIMC,
-    formulaWaterRequirement
+    formulaWaterRequirement,
+    calcCalories,
     )
 
 class CalculationView(APIView):
@@ -26,20 +27,23 @@ class CalculationView(APIView):
                 return Response({"Error":"Faltan datos en el perfil del usuario."}, status=status.HTTP_400_BAD_REQUEST)
             
             if formula == 'harris':
-                tbm = formulaHarrisBenedict(weight, height, age, sex, activity)
+                tbm = formulaHarrisBenedict(weight, height, age, sex)
             else: #formula == 'mifflin'
-                tbm = formulaMifflinStJeor(weight, height, age, sex, activity)
+                tbm = formulaMifflinStJeor(weight, height, age, sex)
 
+            calories = calcCalories(tbm, activity)
             waterRequirement = formulaWaterRequirement(weight)
             imc = formulaIMC(weight, height)
 
             user.basalmetabolism = tbm
+            user.calories = calories
             user.waterrequirement = waterRequirement
             user.bodymassindex = imc
             user.save()
 
             return Response({
             'tbm' : tbm,
+            'calories' : calories,
             'water_requirement' : waterRequirement, 
             'imc' : imc,
             }, status=status.HTTP_200_OK)

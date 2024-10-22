@@ -111,6 +111,7 @@ export const Profile = () => {
             // Guardar los resultados en el estado
             setResults({
                 tbm: response.data.tbm,
+                calories: response.data.calories,
                 waterRequirement: response.data.water_requirement,
                 imc: response.data.imc
             });
@@ -181,6 +182,7 @@ export const Profile = () => {
                     {results.tbm !== null && (
                         <div>
                             <p>Tasa de Metabolismo Basal (TMB): {results.tbm}</p>
+                            <p>Calorías: {results.calories}</p>
                             <p>Índice de Masa Corporal (IMC): {results.imc}</p>
                             <p>Requerimiento de Agua: {results.waterRequirement} ml/día</p>
                         </div>
