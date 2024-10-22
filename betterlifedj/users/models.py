@@ -23,3 +23,4 @@ class User(AbstractUser):
     basalmetabolism = models.FloatField("Metabolismo basal", blank=True, null=True)
     bodymassindex = models.FloatField("Indice de masa corporal", blank=True, null=True)
     waterrequirement = models.FloatField("Requerimiento de agua", blank=True, null=True)
+    calories = models.FloatField("Calorias", blank=True, null=True)
